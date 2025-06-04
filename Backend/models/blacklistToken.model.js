@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 let blacklistTokenSchema = new mongoose.Schema({
     token:{
         type:String,
-        required : true,
+        require : true,
         unique:true,
     },
     createdAt:{

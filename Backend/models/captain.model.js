@@ -21,7 +21,7 @@ const captainSchema = mongoose.Schema({
         require:true,
         unique:true,
         lowercase:true,
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Please fill a valid email address"],
+        // match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Please fill a valid email address"],
     },
     password:{
         type:String,
@@ -71,7 +71,7 @@ captainSchema.methods.generateAuthToken = function(){
     const token = jwt.sign({_id:this._id},process.env.JWT_SECRET,{expiresIn:'24h'})
     return token;
 }
-captainSchema.methods.comparePassword = async function () {
+captainSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password,this.password);
 }
 captainSchema.statics.hashPassword = async function(password) { 

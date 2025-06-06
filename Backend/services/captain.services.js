@@ -9,7 +9,7 @@ module.exports.createCaptina = async({firstname,lastname,email,password,color,pl
             firstname,
             lastname,
         },
-        email:
+        email,
         password,
         vehicle:{
             color,

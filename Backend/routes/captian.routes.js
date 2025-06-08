@@ -20,6 +20,6 @@ router.post('/login',[
     body('password').isLength({min:6}).withMessage('password must be at least 6 character long'),
 ],captianController.loginCaptain)
 
-router.post("/profile",authMiddlewear.authCaptian,captianController.getCaptainProfile);
-router.post("/logout",authMiddlewear.authCaptian,captianController.logoutCaptian);
+router.get("/profile",authMiddlewear.authCaptian,captianController.getCaptainProfile);
+router.get("/logout",authMiddlewear.authCaptian,captianController.logoutCaptian);
 module.exports = router;

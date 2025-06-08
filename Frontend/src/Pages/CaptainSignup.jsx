@@ -1,26 +1,61 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { CaptainDataContext } from '../context/CaptainContext';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CaptainSignup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+
     const [captainData, setcaptainData] = useState({});
-    const submitHandler = (e) => {
+    const [vehicleColor, setVehicleColor] = useState('');
+    const [vehiclePlate, setVehiclePlate] = useState('');
+    const [vehicleCapacity, setVehicleCapacity] = useState('');
+    const [vehicleType, setVehicleType] = useState('');
+
+    const navigate = useNavigate();
+
+    const {captain,setCaptain} = useContext(CaptainDataContext);
+
+    async function submitHandler(e) {
         e.preventDefault();
-        setcaptainData({
+        const newCaptain = {
             fullname: {
-                firstName: firstName,
-                lastName: lastName,
+                firstname: firstName,
+                lastname: lastName,
             },
-            email, password
-        });
-        setEmail('')
-        setPassword('')
-        setFirstName('')
-        setLastName('')
-        console.log(captainData)
+            email: email,
+            password: password,
+            vehicle: {
+                color: vehicleColor,
+                plate: vehiclePlate,
+                capacity: vehicleCapacity,
+                vehicleType : vehicleType
+            }
+        };
+
+        // console.log(newCaptain);
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/register`, newCaptain);
+        // console.log(response);
+        if (response.status === 201) {
+            let data = response.data;
+            setCaptain(data.captain);
+            localStorage.setItem('token', data.token);
+            navigate('/captain-home');
+        }
+
+        setEmail('');
+        setPassword('');
+        setFirstName('');
+        setLastName('');
+        setVehicleColor('');
+        setVehiclePlate('');
+        setVehicleCapacity('');
+        setVehicleType('');
+        // console.log(captainData);
     }
     return (
         <div className='p-7 h-screen flex flex-col justify-between'>
@@ -57,11 +92,43 @@ const CaptainSignup = () => {
                     }}
                         className='bg-[#eeeeee]  mb-6 rounded px-4 py-2 border w-full text-lg placeholder:text-base'
                         placeholder='password' />
+                    <h3 className='text-lg font-medium mb-2 text-left pl-1'>Vehicle Information</h3>
+                    <input type="text"
+                        placeholder='Vehicle Color' required value={vehicleColor} onChange={(e) => {
+                            setVehicleColor(e.target.value)
+                        }}
+                        className='bg-[#eeeeee]  mb-6 rounded px-4 py-2 border w-full text-lg placeholder:text-base'
+                    />
+                    <input type="text"
+                        placeholder='Vehicle Plate Number' required value={vehiclePlate} onChange={(e) => {
+                            setVehiclePlate(e.target.value)
+                        }}
+                        className='bg-[#eeeeee]  mb-6 rounded px-4 py-2 border w-full text-lg placeholder:text-base'
+                    />
+                    <div className='flex gap-4 mb-6'>
+                        <input type="number"
+                            placeholder='Capacity' required value={vehicleCapacity} onChange={(e) => {
+                                setVehicleCapacity(e.target.value)
+                            }}
+                            className='bg-[#eeeeee] w-1/2 rounded px-4 py-2 border text-lg placeholder:text-base'
+                        />
+                        <select 
+                            value={vehicleType} 
+                            onChange={(e) => setVehicleType(e.target.value)}
+                            className='bg-[#eeeeee] w-1/2 rounded px-4 py-2 border text-lg'
+                            required
+                        >
+                            <option value="">Vehicle Type</option>
+                            <option value="bike">Car</option>
+                            <option value="auto">Bike</option>
+                            <option value="car">Auto</option>
+                        </select>
+                    </div>
                     <button
-                        className='bg-[#000000] text-white font-semibold mb-7 rounded px-4 py-2 w-full text-lg placeholder:text-base'
-                    >Login</button>
+                        className='bg-[#000000] text-white font-semibold mb-2 rounded px-4 py-2 w-full text-lg placeholder:text-base'
+                    >Create account</button>
                 </form>
-                <p className='text-center'>Already have a Account? <Link to={"/login"} className='text-blue-600'>Login here</Link></p>
+                <p className='text-center mb-5'>Already have a Account? <Link to={"/login"} className='text-blue-600'>Login here</Link></p>
             </div>
             <div>
                 <p className='text-[10px]'> This site is protected by reCAPTCHA and the <span className='underline'>Google Privacy Policy</span> and <span className='underline '>Terms of Services apply</span>

@@ -1,31 +1,18 @@
 import React from 'react'
 
-export const WaitingForDriver = ({ setWaitingForDriver }) => {
+const RidePopUp = ({ setRidePopUpPanel, setConfirmRidePopUpPanel }) => {
     return (
-        <div>
-            <h5 className='text-center w-[93%] absolute top-0' onClick={() => {
-                setWaitingForDriver(false);
-            }}><i className="text-3xl ri-arrow-down-wide-line"></i></h5>
-
-
-            <h3 className='text-lg font-bold  text-left mb-1'>PIN:22310</h3>
-
-
-            <div className='flex items-center justify-between'>
-                <img
-                    className='h-12'
-                    src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1649231091/assets/2c/7fa194-c954-49b2-9c6d-a3b8601370f5/original/Uber_Moto_Orange_312x208_pixels_Mobile.png"
-                    alt=""
-                />
-                <div className='text-right'>
-                    <h2 className='text-[1.2rem] font-medium'>Avinash</h2>
-                    <h4 className='text-xl font-bold tracking-tight'>MH26 AB 1234</h4>
-                    <p className='text-sm text-gray-600 -mt-1 -mb-1'>Honda Bike</p>
+        <>
+            <h3 className='text-2xl font-semibold mb-5'>New Ride Available!</h3>
+            <div className='flex items-center justify-between mt-4 p-3 mt-4 bg-yellow-400 rounded-lg'>
+                <div className='flex items-center gap-3 '>
+                    <img className='h-10 rounded-full object-cover w-10' src="https://img.freepik.com/free-photo/young-female-being-uber-driver_23-2149184277.jpg" alt="" />
+                    <h2 className='text-lg font-medium'>Harsh Patel</h2>
                 </div>
+                <h5 className='text-lg font-semibold'>2.2 KM</h5>
             </div>
-
             <div className='flex flex-col items-center bg-white relative '>
-                <div className='w-full mt-5 bg-white'>
+                <div className=' w-full '>
                     <div className='flex items-center gap-5 p-3 border-b-2'>
                         <i className="text-lg ri-map-pin-range-fill"></i>
                         <div>
@@ -40,7 +27,7 @@ export const WaitingForDriver = ({ setWaitingForDriver }) => {
                             <p className='text-sm -mt-1 text-gray-600'>Kankariya Talab, Bhopal</p>
                         </div>
                     </div>
-                    <div className='flex items-center gap-5 p-3'>
+                    <div className='flex items-center gap-5 p-3 '>
                         <i className="ri-currency-line"></i>
                         <div>
                             <h3 className='text-lg font-medium'>&#8377;65.17</h3>
@@ -48,9 +35,21 @@ export const WaitingForDriver = ({ setWaitingForDriver }) => {
                         </div>
                     </div>
                 </div>
+                <div className='w-full flex justify-between'>
+                    <button onClick={() => {
+                        setRidePopUpPanel(false)
+                    }} className='w-[48%] mt-5 bg-gray-400 text-white font-semibold p-2 rounded-lg'>Ignore</button>
+                    <button onClick={() => {
+                        setRidePopUpPanel(false);
+                        setConfirmRidePopUpPanel(true);
+                    }} className='w-[48%] mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg'>Accept</button>
+                </div>
+
             </div>
+        </>
 
 
-        </div>
     )
 }
+
+export default RidePopUp

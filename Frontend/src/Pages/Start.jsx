@@ -16,10 +16,8 @@ const Start = () => {
                         className="relative flex justify-center items-center w-full bg-black text-white py-3 rounded mt-5"
                     >
                         <span className='font-bold '>Continue</span>
-                        <i class="ri-arrow-right-line absolute right-4 text-xl"></i>
+                        <i className="ri-arrow-right-line absolute right-4 text-xl"></i>
                     </Link>
-
-
                 </div>
             </div>
         </div>

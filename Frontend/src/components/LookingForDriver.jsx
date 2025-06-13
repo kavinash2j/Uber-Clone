@@ -5,7 +5,7 @@ export const LookingForDriver = ({ setVehicleFound }) => {
         <div>
             <h5 className='p-1 text-center w-[93%] absolute top-0' onClick={() => {
                 setVehicleFound(false);
-            }}><i class="text-3xl ri-arrow-down-wide-line"></i></h5>
+            }}><i className="text-3xl ri-arrow-down-wide-line"></i></h5>
 
 
 

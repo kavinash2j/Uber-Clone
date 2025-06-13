@@ -19,7 +19,7 @@ export const Home = () => {
   const [vehicleFound, setVehicleFound] = useState(false);
   const vehicleFoundRef = useRef(null);
   const waitingForDriverRef = useRef(null);
-  const [waitingForDriver, setWaitingForDriver] = useState(true);
+  const [waitingForDriver, setWaitingForDriver] = useState(false);
 
   function submitHandler(e) {
     e.preventDefault();
@@ -160,7 +160,7 @@ export const Home = () => {
       <div ref={vehicleFoundRef} className='fixed w-full z-10 px-3 py-8 bg-white bottom-0 translate-y-[100%] pt-12'>
         <LookingForDriver setVehicleFound={setVehicleFound} ></LookingForDriver>
       </div>
-      <div ref={waitingForDriverRef} className='fixed w-full z-10 px-3 py-4 bg-white bottom-0 pt-9'>
+      <div ref={waitingForDriverRef} className='fixed w-full z-10 px-3 py-4 translate-y-[100%] bg-white bottom-0 pt-9'>
         <WaitingForDriver setWaitingForDriver={setWaitingForDriver} ></WaitingForDriver>
       </div>
 

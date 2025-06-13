@@ -9,7 +9,7 @@ export const VehiclePanel = ({ setVehiclePanelOpen, setCofirmRidePanel }) => {
         <>
             <h5 className='p-1 text-center w-[93%] absolute top-0' onClick={() => {
                 setVehiclePanelOpen(false);
-            }}><i class="text-3xl ri-arrow-down-wide-line"></i></h5>
+            }}><i className="text-3xl ri-arrow-down-wide-line"></i></h5>
 
             <h3 className='text-2xl font-semibold mb-3'>Choose a Vehicle</h3>
 

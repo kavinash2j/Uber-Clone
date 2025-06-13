@@ -13,6 +13,7 @@ import { CaptainProtectedWrapper } from "../wrapComponents/CaptainProtectedWrapp
 import { CaptainLogout } from "./Pages/CaptainLogout"
 import 'remixicon/fonts/remixicon.css'
 import Riding from "./Pages/Riding"
+import CaptainRiding from "./Pages/captainRiding"
 
 
 
@@ -36,6 +37,7 @@ function App() {
       } />
       <Route path="/captain-logout" element={<CaptainLogout />} />
       <Route path="/riding" element={<Riding />} />
+      <Route path="/captain-riding" element={<CaptainRiding />} />
     </Routes>
 
   )

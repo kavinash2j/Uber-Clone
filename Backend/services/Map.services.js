@@ -1,4 +1,5 @@
 const axios = require('axios');
+const captainModel = require('../models/captain.model');
 const { MAP_TOKEN } = process.env;
 
 // Function to get coordinates from an address using Mapbox API
@@ -67,9 +68,20 @@ async function getSuggestionFromAddress(address) {
         throw new Error(`Error fetching suggestions: ${error.message}`);
     }
 }
+async function getCaptainsInTheRadius(lat, lng, radius) {
+    const captains = await captainModel.find({
+        location: {
+            $geoWithin: {
+                $centerSphere: [[lat, lng], radius / 6371]
+            }
+        }
+    });
+    return captains;
+}
 
 module.exports = {
     getCoordinatesFromAddress,
     getTimeAndDistance,
-    getSuggestionFromAddress
+    getSuggestionFromAddress,
+    getCaptainsInTheRadius
 }

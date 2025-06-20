@@ -1,25 +1,24 @@
 import React from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import { response } from 'express';
 
 export const CaptainLogout = () => {
     const token = localStorage.getItem("token");
 
     const navigate = useNavigate();
-    axios.get(`${import.meta.env.VITE_API_URL}/captain/logout`,{
-        headers:{
-            Authorization:`Bears ${token}`
+    axios.get(`${import.meta.env.VITE_API_URL}/captain/logout`, {
+        headers: {
+            Authorization: `Bears ${token}`
         }
-    }).then((response)=>{
-        if(response.status === 200){
+    }).then((response) => {
+        if (response.status === 200) {
             localStorage.removeItem('token'),
-            navigate('/login')
+                navigate('/login')
         }
     })
-  return (
-    <h1>CaptainLogout</h1>
-  )
+    return (
+        <h1>CaptainLogout</h1>
+    )
 }
 
 export default CaptainLogout;

@@ -46,10 +46,10 @@ async function getDistanceAndTime(req, res) {
 
 async function getAutoCompleteSuggestion(req, res) {
     const address = req.query.address;
+    console.log('Address:', address);
     if (!address) {
         return res.status(400).json({ error: 'Address is required' });
     }
-
     try {
         const suggestions = await getSuggestionFromAddress(address);
         return res.status(200).json(suggestions);

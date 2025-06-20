@@ -43,7 +43,7 @@ module.exports.authCaptian = async function (req, res, next) {
         const captian = await captainModel.findOne({ _id: decoded._id })
         req.captian = captian;
         // console.log("captain service id called")
-        // console.log(req.captian)
+        console.log("req.captain from auth : ", req.captian)
         return next();
 
     } catch (error) {

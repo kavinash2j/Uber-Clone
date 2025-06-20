@@ -56,7 +56,6 @@ module.exports.loginCaptain = async function (req, res, next) {
 }
 module.exports.logoutCaptian = async function (req, res, next) {
     const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
-    // const token = req.cookies.token || req.headers.authorization?.split(' ')[1]
     await blacklistTokenModel.create({ token });
     res.clearCookie('token');
     res.status(200).json({ meassage: "logout Successfully" });

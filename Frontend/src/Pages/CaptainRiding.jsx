@@ -3,11 +3,19 @@ import { Link } from 'react-router-dom'
 import FinishRidePanel from '../components/FinishRidePanel'
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useLocation } from 'react-router-dom';
+import LiveMap from '../components/LiveMap';
+
 
 const CaptainRiding = () => {
+    const location = useLocation();
 
     const [finishRidePanel, setFinshRidePanel] = useState(false);
     const finishRideRef = useRef(null);
+    const { ride } = location.state
+    if (!ride) {
+        throw new Error("ride is not acceing values")
+    }
 
     useGSAP(function () {
         if (finishRidePanel) {
@@ -32,7 +40,9 @@ const CaptainRiding = () => {
 
             </div>
             <div className='h-4/5'>
-                <img className='h-full w-full object-cover' src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" alt="" />
+                <div className='h-full w-full object-cover' >
+                    <LiveMap></LiveMap>
+                </div>
             </div>
             <h5 className='text-center  w-full w-[93%] absolute rotate-180' onClick={() => {
 
@@ -48,7 +58,7 @@ const CaptainRiding = () => {
                 }} className=' bg-green-600 text-white font-semibold p-3 px-10 rounded-lg'>Complete Ride</button>
             </div>
             <div ref={finishRideRef} className='fixed w-full z-10 px-3 py-4 translate-y-[100%] bg-white bottom-0 pt-9'>
-                <FinishRidePanel setFinshRidePanel={setFinshRidePanel}></FinishRidePanel>
+                <FinishRidePanel ride={ride} setFinshRidePanel={setFinshRidePanel}></FinishRidePanel>
             </div>
         </div>
     )

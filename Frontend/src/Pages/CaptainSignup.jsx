@@ -9,7 +9,6 @@ const CaptainSignup = () => {
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-
     const [captainData, setcaptainData] = useState({});
     const [vehicleColor, setVehicleColor] = useState('');
     const [vehiclePlate, setVehiclePlate] = useState('');
@@ -18,7 +17,7 @@ const CaptainSignup = () => {
 
     const navigate = useNavigate();
 
-    const {captain,setCaptain} = useContext(CaptainDataContext);
+    const { captain, setCaptain } = useContext(CaptainDataContext);
 
     async function submitHandler(e) {
         e.preventDefault();
@@ -33,7 +32,7 @@ const CaptainSignup = () => {
                 color: vehicleColor,
                 plate: vehiclePlate,
                 capacity: vehicleCapacity,
-                vehicleType : vehicleType
+                vehicleType: vehicleType
             }
         };
 
@@ -43,6 +42,7 @@ const CaptainSignup = () => {
         if (response.status === 201) {
             let data = response.data;
             setCaptain(data.captain);
+            console.log(captain)
             localStorage.setItem('token', data.token);
             navigate('/captain-home');
         }
@@ -112,8 +112,8 @@ const CaptainSignup = () => {
                             }}
                             className='bg-[#eeeeee] w-1/2 rounded px-4 py-2 border text-lg placeholder:text-base'
                         />
-                        <select 
-                            value={vehicleType} 
+                        <select
+                            value={vehicleType}
                             onChange={(e) => setVehicleType(e.target.value)}
                             className='bg-[#eeeeee] w-1/2 rounded px-4 py-2 border text-lg'
                             required

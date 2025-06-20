@@ -5,31 +5,30 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const UserLogin = () => {
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
-    const [userData,setUserData] = useState({});
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [userData, setUserData] = useState({});
 
     const navigate = useNavigate();
-    const {user,setUser} = useContext(UserDataContex);
+    const { user, setUser } = useContext(UserDataContex);
 
-    const submitHandler =  async (e)=>{
+    const submitHandler = async (e) => {
         e.preventDefault();
-        const userData =  {
-            email:email,
-            password:password
+        const userData = {
+            email: email,
+            password: password
         }
-        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/login`,userData);
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/login`, userData);
 
-        if(response.status === 200){
+        if (response.status === 200) {
             const data = response.data;
-            setUser(data.user);
-            localStorage.setItem("token",data.token)
+            setUser(data);
+            localStorage.setItem("token", data.token)
             navigate('/home');
         }
 
         setPassword('')
         setEmail('')
-        console.log(userData)
     }
     return (
         <div className='p-7 h-screen flex flex-col justify-between'>
@@ -39,13 +38,13 @@ const UserLogin = () => {
                 <form onSubmit={submitHandler}>
                     <h3 className='text-lg font-medium mb-2 text-left pl-1'>What's your email</h3>
                     <input type="email"
-                        placeholder='email@example.com' required value={email} onChange={(e)=>{
+                        placeholder='email@example.com' required value={email} onChange={(e) => {
                             setEmail(e.target.value)
-                        }}  
+                        }}
                         className='bg-[#eeeeee]  mb-7 rounded px-4 py-2 border w-full text-lg placeholder:text-base'
                     />
                     <h3 className='text-lg font-medium mb-2 text-left pl-1'>Enter Password</h3>
-                    <input type="password" required value={password} onChange={(e)=>{
+                    <input type="password" required value={password} onChange={(e) => {
                         setPassword(e.target.value)
                     }}
                         className='bg-[#eeeeee]  mb-7 rounded px-4 py-2 border w-full text-lg placeholder:text-base'

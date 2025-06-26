@@ -8,7 +8,8 @@ const CaptainDetails = () => {
 
         <div> <div className='flex items-center justify-between'>
             <div className='flex items-center justify-start gap-3'>
-                <img className='h-10 w-10 rounded-full object-cover' src="https://img.freepik.com/free-photo/young-female-being-uber-driver_23-2149184277.jpg" alt="" />
+                <img className='h-10
+                 w-10 rounded-full object-cover' src="https://img.freepik.com/free-photo/young-female-being-uber-driver_23-2149184277.jpg" alt="" />
                 <h4 className='text-lg font-medium capitalize'>{captain.fullname.firstname + " " + captain.fullname.lastname}</h4>
             </div>
             <div>

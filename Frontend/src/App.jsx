@@ -13,7 +13,7 @@ import { CaptainProtectedWrapper } from "./wrapComponents/CaptainProtectedWrappe
 import { CaptainLogout } from "./Pages/CaptainLogout"
 import 'remixicon/fonts/remixicon.css'
 import Riding from "./Pages/Riding"
-import CaptainRiding from "./Pages/captainRiding"
+import CaptainRiding from "./Pages/CaptainRiding"
 
 
 

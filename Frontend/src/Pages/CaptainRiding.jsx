@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useLocation } from 'react-router-dom';
 import LiveMap from '../components/LiveMap';
+import DirectionMap from '../components/DirectionMap';
 
 
 const CaptainRiding = () => {
@@ -16,7 +17,7 @@ const CaptainRiding = () => {
     if (!ride) {
         throw new Error("ride is not acceing values")
     }
-
+    console.log("ride from CaptainRiding", ride)
     useGSAP(function () {
         if (finishRidePanel) {
             gsap.to(finishRideRef.current, {
@@ -41,7 +42,7 @@ const CaptainRiding = () => {
             </div>
             <div className='h-4/5'>
                 <div className='h-full w-full object-cover' >
-                    <LiveMap></LiveMap>
+                    <DirectionMap origin={ride.pickup} destination={ride.destination} ></DirectionMap>
                 </div>
             </div>
             <h5 className='text-center  w-full w-[93%] absolute rotate-180' onClick={() => {
@@ -60,7 +61,7 @@ const CaptainRiding = () => {
             <div ref={finishRideRef} className='fixed w-full z-10 px-3 py-4 translate-y-[100%] bg-white bottom-0 pt-9'>
                 <FinishRidePanel ride={ride} setFinshRidePanel={setFinshRidePanel}></FinishRidePanel>
             </div>
-        </div>
+        </div >
     )
 }
 

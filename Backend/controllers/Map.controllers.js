@@ -1,4 +1,5 @@
 const { getCoordinatesFromAddress, getTimeAndDistance, getSuggestionFromAddress } = require('../services/Map.services.js');
+const { sendMessageToSocketId } = require('../socket.js');
 
 async function getCoordinate(req, res) {
     const { address } = req.query;
@@ -26,7 +27,6 @@ async function getDistanceAndTime(req, res) {
     try {
         const fromCoordinates = await getCoordinatesFromAddress(from);
         const toCoordinates = await getCoordinatesFromAddress(to);
-
         // Here you would typically call a distance matrix API to get the distance and time
         // For demonstration, let's assume we have a mock function that returns dummy data
 

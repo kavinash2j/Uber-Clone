@@ -25,7 +25,11 @@ module.exports.createRide = async (req, res) => {
         });
 
         const pickupCoordinates = await mapServices.getCoordinatesFromAddress(pickup);
-        const captainsInRadius = await mapServices.getCaptainsInTheRadius(pickupCoordinates.latitude, pickupCoordinates.longitude, 100);
+        const destinationCoordinates = await mapServices.getCoordinatesFromAddress(destination);
+        console.log("pickup", pickupCoordinates, "destination", destinationCoordinates)
+        sendMessageToSocketId(ride._id, { event: "ride-Coordinates", data: { pickupCoordinates, destinationCoordinates } });
+
+        const captainsInRadius = await mapServices.getCaptainsInTheRadius(pickupCoordinates.latitude, pickupCoordinates.longitude, 100, vehicleType);
         console.log("pickupcoordinates", pickupCoordinates);
 
         ride.otp = ""

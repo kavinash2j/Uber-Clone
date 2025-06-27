@@ -68,14 +68,18 @@ async function getSuggestionFromAddress(address) {
         throw new Error(`Error fetching suggestions: ${error.message}`);
     }
 }
-async function getCaptainsInTheRadius(lat, lng, radius) {
+async function getCaptainsInTheRadius(lat, lng, radius, vehicleType) {
     const captains = await captainModel.find({
         location: {
             $geoWithin: {
                 $centerSphere: [[lat, lng], radius / 6371]
             }
-        }
-    });
+        },
+        'vehicle.vehicleType': vehicleType
+    }
+
+    );
+    console.log(captains);
     return captains;
 }
 

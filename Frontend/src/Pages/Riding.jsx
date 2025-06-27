@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { SocketContext } from '../context/SocketContext';
 import { useNavigate } from 'react-router-dom';
 import LiveMap from '../components/LiveMap';
+import DirectionMap from '../components/DirectionMap';
 
 const Riding = () => {
     const location = useLocation();
     const { socket } = React.useContext(SocketContext);
     const navigate = useNavigate();
+    const [loc, setLoc] = useState({});
+
 
     socket.on("ride-ended", () => {
         console.log("Ride socket event received");
@@ -20,13 +23,13 @@ const Riding = () => {
     if (!vehicleDetails || !locFormat || !ride) {
         throw new Error("Required data is missing in the location state");
     }
+    console.log("ride ", ride);
     return (
         <div className='h-screen'>
             <Link to='/home' className='fixed right-2 top-2 h-10 w-10 bg-white flex items-center justify-center rounded-full'><i className="text-lg ri-home-5-line"></i></Link>
-            <div className='h-[55%]'>
-                <div className='h-full w-full object-cover'>
-                    <LiveMap></LiveMap>
-                </div>
+            <div className="w-screen h-[60vh] relative">
+                <DirectionMap origin={ride.pickup} destination={ride.destination} ></DirectionMap>
+
             </div>
             <div className='h-[45%] px-3 flex flex-col justify-around'>
                 <div className='flex items-center justify-between'>
@@ -61,7 +64,7 @@ const Riding = () => {
                         </div>
                     </div>
                 </div>
-                <button className='w-full bg-green-600 text-white font-semibold p-2  rounded-lg'>Make a Payment</button>
+                <Link to={'/home'} className='inline-block w-full text-center bg-green-600 text-white font-semibold p-2  rounded-lg'>Ride Completed</Link>
             </div>
         </div>
     )

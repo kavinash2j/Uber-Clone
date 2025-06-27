@@ -114,7 +114,6 @@ export const CaptainHome = () => {
         <div className='h-full w-full object-cover'  >
           <LiveMap></LiveMap>
         </div>
-
       </div>
       <div className='h-2/5 p-6'>
         <CaptainDetails></CaptainDetails>
